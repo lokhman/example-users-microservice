@@ -8,7 +8,7 @@ RUN apk update && \
     go get -u github.com/codegangsta/gin && \
     go get -u github.com/golang/dep/cmd/dep && \
     go get -u github.com/swaggo/swag/cmd/swag && \
-    dep ensure && \
+    dep ensure -vendor-only && \
     swag init
 
 CMD gin -i run

@@ -42,6 +42,7 @@ services:
       - nsqd
     volumes:
       - .:/go/src/github.com/lokhman/example-users-microservice
+      - vendor:/go/src/github.com/lokhman/example-users-microservice/vendor
     ports:
       - 8000:8000
     environment:
@@ -53,5 +54,6 @@ services:
     tty: true
 
 volumes:
+  vendor:
   database_data:
     driver: local
