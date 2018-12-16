@@ -22,9 +22,9 @@ whereas PostgreSQL is just my personal choice of DBMS.
 ## Requirements
 In order to start the microservice for development and debug you need to have Docker
 installed locally. To production the microservice can be deployed using any orchestration
-software (e.g. Kubernetes, Amazon ECS, etc). To support scalability the `app` service can
-be scaled to multiple nodes behind a load balancer. Deployment to production is out of
-scope of this project.
+software (e.g. [Kubernetes][kubernetes], [Amazon ECS][ecs], etc). To support scalability
+the `app` service can be scaled to multiple nodes behind a load balancer. Deployment to
+production is out of scope of this project.
 
 ## How to start
 To start the microservice, first unpack the snapshot to the local directory and run the
@@ -108,6 +108,9 @@ This code is available under the MIT license. LICENSE file describes this in det
 [nsq]: https://nsq.io/
 [nats]: https://nats.io/
 [kafka]: https://kafka.apache.org/
+[rabbitmq]: https://www.rabbitmq.com/
 [gin]: https://gin-gonic.github.io/gin/
 [gorm]: http://gorm.io/
+[kubernetes]: https://kubernetes.io/
+[ecs]: https://aws.amazon.com/ecs/
 [gin-auto]: https://github.com/codegangsta/gin
