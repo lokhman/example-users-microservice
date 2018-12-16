@@ -1,0 +1,202 @@
+basePath: '{{.BasePath}}'
+definitions:
+  api.UserInput:
+    properties:
+      country:
+        example: RU
+        type: string
+      email:
+        example: alex.lokhman@gmail.com
+        type: string
+      first_name:
+        example: Alex
+        type: string
+      last_name:
+        example: Lokhman
+        type: string
+      nickname:
+        example: VisioN
+        type: string
+      password:
+        example: MyPassword
+        type: string
+    required:
+    - country
+    - email
+    - first_name
+    - last_name
+    - nickname
+    - password
+    type: object
+  common.HTTPError:
+    properties:
+      error:
+        example: Error message
+        type: string
+    type: object
+  model.User:
+    properties:
+      country:
+        example: RU
+        type: string
+      email:
+        example: alex.lokhman@gmail.com
+        type: string
+      first_name:
+        example: Alex
+        type: string
+      id:
+        example: 1
+        type: integer
+      last_name:
+        example: Lokhman
+        type: string
+      nickname:
+        example: VisioN
+        type: string
+    type: object
+host: '{{.Host}}'
+info:
+  contact:
+    email: alex.lokhman@gmail.com
+    name: Alex Lokhman
+    url: https://github.com/lokhman
+  description: This is the example microservice for manipulating users.
+  license: {}
+  title: Example Users Microservice
+  version: "0.1"
+paths:
+  /users:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User country
+        in: query
+        maxLength: 2
+        minLength: 2
+        name: country
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: List users
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: New user details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/api.UserInput'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+      summary: Create new user
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+      summary: Delete user by ID
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+      summary: View user details
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      - description: New user details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/api.UserInput'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/common.HTTPError'
+            type: object
+      summary: Update user by ID
+swagger: "2.0"
